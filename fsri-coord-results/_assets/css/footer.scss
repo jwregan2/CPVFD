@@ -1,0 +1,42 @@
+@import "colors";
+
+.footer {
+  font-family: $font-primary;
+  background-color: $background;
+  font-size: 0.8125rem;
+  padding: 1rem 5%;
+
+  .copyright {
+    color: white;
+    opacity: 0.31;
+  }
+
+  .links {
+    color: white;
+    opacity: 0.31;
+
+    a {
+      text-decoration: none;
+      color: white;
+      padding: 0 0.5rem;
+      border-left: 1px solid $gray;
+
+      &:active, &:visited {
+        color: white;
+      }
+
+      &:hover {
+        opacity: 0.9;
+      }
+
+      &:first-of-type {
+        padding-left: 0;
+        border-left: none;
+      }
+
+      &:last-of-type {
+        padding-right: 0;
+      }
+    }
+  }
+}

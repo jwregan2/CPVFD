@@ -1,0 +1,35 @@
+{
+  "name": "coord-attack-results",
+  "homepage": "https://github.com/ulfsri/fsri-site",
+  "authors": [
+    "Joe Meilinger <joe@prominentedge.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "vex": "^4.0.0",
+    "isotope": "^3.0.4",
+    "slick-carousel": "^1.6.0",
+    "fancybox": "#3.1.20",
+    "moment": "^2.18.1",
+    "js-cookie": "^2.1.4",
+    "glyphicons-only-bootstrap": "^0.0.1",
+    "image-map-resizer": "^1.0.3",
+    "tether": "^1.4.3",
+    "tippyjs": "2.0.8"
+  },
+  "resolutions": {
+    "angular": ">= 1.2.0"
+  }
+}

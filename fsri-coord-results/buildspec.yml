@@ -1,0 +1,23 @@
+version: 0.2
+
+env:
+  variables:
+    JEKYLL_ENV: "production"
+
+phases:
+  install:
+    commands:
+      - sudo apt-get update
+      - sudo apt-get install -y nodejs
+      - ln -s /usr/bin/nodejs /usr/bin/node
+      - sudo apt-get install -y npm
+      - NPM_CONFIG_STRICT_SSL=false npm install bower -g
+      - bundle install
+      - aws configure set preview.cloudfront true
+      - bower install --allow-root
+      - chmod +x build.sh
+      - chmod +x build-prod.sh
+      - chmod +x build-test.sh
+  build:
+    commands:
+      - ./build.sh

@@ -1,0 +1,55 @@
+@import "colors";
+
+.timeline {
+  padding-left: 0;
+
+  .row {
+    .icon {
+      color: $white;
+      margin: 0 2rem;
+      position: relative;
+      border-radius: 3rem;
+      font-size: 150%;
+      padding: 0 0.8rem;
+      z-index: 1;
+
+      &.icon-flame {
+        background-color: $red;
+      }
+
+      &.circle {
+        background-color: $red;
+        padding: 0.32rem;
+        margin: 0 2.8rem;
+
+        div {
+          background-color: $white;
+          height: 8px;
+          width: 8px;
+          border-radius: 2rem;
+        }
+      }
+    }
+
+    .line {
+      width: 3px;
+      min-height: 1.2rem;
+      background: $timelineLine;
+      transform: scale(1, 1.2);
+      -ms-transform: scale(1, 1.2);
+      -webkit-transform: scale(1, 1.2);
+    }
+
+    &:first-of-type {
+      .line:first-of-type {
+        visibility: hidden;
+      }
+    }
+
+    &:last-of-type {
+      .line:last-of-type {
+        visibility: hidden;
+      }
+    }
+  }
+}

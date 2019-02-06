@@ -1,0 +1,108 @@
+---
+layout: base
+title: DHS Coordinated Attack
+active: home
+multimedia:
+    images:
+        - 'home'
+custom_js:
+    - 'home.js'
+---
+
+<script>
+    var multimedia = {
+        {% for group in page.multimedia %}
+            {{ group[0] }}: [
+            {% for item in group[1] %}
+                '{{ item }}',
+            {% endfor %}
+            ],
+        {% endfor %}
+    };
+
+    window.baseurl = "{{ site.baseurl }}";
+</script>
+
+<div class="home">
+    <div class="hero" layout="column" layout-align="center center" flex="none">
+        <div class="header">
+            <div class="title">Coordinated Fire Attack</div>
+            <div class="subtitle"> Improve firefighting tactics, fireground safety, and firefighter standard operating procedures</div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section" layout="column" layout-gt-sm="row">
+            <div class="experiment-group-card" layout="column" flex>
+                <div class="image" style="background: url({{ 'home/kitchen.jpg' | asset_path }}) no-repeat center; background-size: cover;">
+                    <div class="image-icon">
+                      <img src="{{ 'home/ranch_house_icon.svg' | asset_path }}"/>
+                    </div>
+                </div>
+                <div class="text" flex>
+                    <div class="title">First Floor Kitchens</div>
+                    <div> To study the impact of fireground coordination on kitchen fires in single family homes, structures were acquired through partnerships with local fire departments. Experiments studied both interior and exterior attack combined with different ventilation types (horizontal and positive pressure). The structures were instrumented to quantify the hazard to potential vicitms and firefighters.</div>
+                </div>
+                <div class="learn-more" layout="column" layout-align="center center">
+                    <a class="-red-button" href="{{ site.baseurl }}{% link kitchen/index.html %}">Learn More</a>
+                </div>
+            </div>
+            <div class="experiment-group-card" layout="column" flex>
+                <div class="image" style="background: url({{ 'home/bedroom.jpg' | asset_path }}) no-repeat center; background-size: cover;">
+                    <div class="image-icon">
+                      <img src="{{ 'home/colonial_house_icon.svg' | asset_path }}"/>
+                    </div>
+                </div>
+                <div class="text" flex>
+                    <div class="title">Second Floor Bedrooms</div>
+                    <div> To study the impact of fireground coordination on second floor bedroom fires in single family homes, structures were acquired through partnerships with local fire departments. Experiments studied both interior and exterior attack combined with different ventilation types (horizontal, vertical, and positive pressure). The structures were instrumented to quantify the hazard to potential vicitms and firefighters.</div>
+                </div>
+                <div class="learn-more" layout="column" layout-align="center center">
+                    <a class="-red-button">Under Construction</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" layout="column" layout-gt-sm="row">
+            <div class="info-left" layout="column" flex="60">
+                <div class="about">
+                    <h1>About The Project</h1>
+                    <p>The UL Firefighter Safety Research Institute (FSRI) is leading a 3-year Technology and Product Development Project examining coordinated fire attack utilizing acquired structures. The increased understanding of fire behavior that has emerged from previous AFG funded research has raised many questions that revolve around what constitutes a coordinated fire attack and how to effectively accomplish it in different types of structures.</p>
+                </div>
+                <div>
+                    <div class="objectives-header">Key Objectives:</div>
+                    <div layout="column">
+                        <div class="objective-row" layout="row">
+                            <div class="-bullet-point">1</div>
+                            <div>The purpose of this study is to improve fire service knowledge of fire dynamics and the impact of their tactics through a better understanding of how suppression and ventilation are coordinated on the fire ground in different types of structures.</div>
+                        </div>
+                        <div class="objective-row" layout="row">
+                            <div class="-bullet-point">2</div>
+                            <div>Expand on previous research studies that examined fire dynamics and fire service tactics and improved firefighter effectiveness and efficiency.</div>
+                        </div>
+                        <div class="objective-row" layout="row">
+                            <div class="-bullet-point">3</div>
+                            <div>Assist in the development of thinking firefighters with a good foundation in fire dynamics and understanding of how their decision making will impact their safety and effectiveness.</div>
+                        </div>
+                        <div class="objective-row" layout="row">
+                            <div class="-bullet-point">4</div>
+                            <div> Provide the data necessary to understand the parameters of a successful coordinated fire attack so that firefighters become more effective and efficient on every fireground across the country.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="info-right" layout="column" flex="40">
+                <div class="project-partners">
+                    <h1>Project Partners</h1>
+                    <p>This project was supported by DHS/FEMA Assitance to Firefighters Grant Program.</p>
+                    <br/>
+                    <img class="dhs-logo" src="{{ 'main_images/afg_fps.jpg' | asset_path }}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/template" id="gridItem">
+    <div class="item" data-idx="<%= idx %>" data-fancybox="multimedia" href="<%= i.href %>" style="overflow: hidden; background-image: url(<%= i.thumbnail %>);"></div>
+</script>

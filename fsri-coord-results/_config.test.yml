@@ -1,0 +1,18 @@
+url: "https://test.ulfirefightersafety.org"
+baseurl: "/private/coordinated-attack"
+disqus_username: ulfsri-test
+cognito:
+  userPoolId: us-east-1_IDFhcwcnF
+  identityPoolId: "us-east-1:bd673830-4a4d-4ada-bde7-d6cfe1b55d94"
+  cognitoRegionUrl: "cognito-idp.us-east-1.amazonaws.com"
+  clientId: "4vm3u5gdmo2alcsogu8ucpvh8q"
+  loginApiUrl: "https://api.test.ulfirefightersafety.org/login"
+  logoutApiUrl: "https://api.test.ulfirefightersafety.org/logout"
+
+
+
+links:
+  home: "/"
+  private: "/private/index.html"
+  privacy: "/privacy-policy.html"
+  terms: "/terms-of-use.html"

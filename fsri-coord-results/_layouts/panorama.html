@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="{% asset_path 'FSRI_GraphicShield.png' %}">
+        <title>{{ page.title }}</title>
+    </head>
+    <body>
+        {{ content }}
+        <div style="text-align:center">
+          <iframe
+             frameborder="0"
+             width="100%"
+             scrolling="no"
+             allowfullscreen
+             src="{{ site.baseurl }}{% link index_2.html %}?image={{ page.group | append:'/' | append: page.experiment | append:'/exp_images/' | append: page.panorama | asset_path }}&is_stereo=false">
+          </iframe>
+        </div>
+    </body>
+</html>

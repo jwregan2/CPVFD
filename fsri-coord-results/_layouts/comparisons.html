@@ -1,0 +1,41 @@
+---
+layout: base
+---
+
+<div class="comparisons" layout="column" layout-align="start center" flex>
+    <div class="hero">
+        <!-- <div class="right-hero" {% if page.right_hero_image %}style="background-image: url('{{ page.right_hero_image | asset_path }}'); background-repeat: no-repeat;"{% endif %}></div> -->
+        <div class="left-hero" {% if page.left_hero_image %}style="background-image: url('{{ page.left_hero_image | asset_path }}'); background-repeat: no-repeat;"{% endif %}></div>
+        <div class="shim"></div>
+        <div class="vs">vs</div>
+        <div class="text" layout-align="start center">
+            <p class="series">Comparison Series</p>
+            <h1>{{ page.title }}</h1>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Comparison Overview</h2>
+        {{ content }}
+        <div layout="column" layout-align="start start" class="more-comparisons">
+            <h2>More Comparisons</h2>
+
+            <a href="{{ site.baseurl }}{% link ranch/livingroom-comparison/index.html %}">
+                Ranch Living Room Closed vs Open Front Door Comparisons
+            </a>
+
+            <a href="{{ site.baseurl }}{% link ranch/kitchen-comparison/index.html %}">
+                Ranch Kitchen Closed vs Open Front Door Comparisons
+            </a>
+
+            <a href="{{ site.baseurl }}{% link ranch/bedroom-comparison/index.html %}">
+                Ranch Bedroom Closed vs Open Front Door Comparisons
+            </a>
+        </div>
+
+        <!-- <a class="top naked" href="#top"><span class="icon-arrow-right"></span></a> -->
+
+        <div class="backtotop">
+        	<span class="icon-arrow-right"></span>
+        </div>
+    </div>
+</div>

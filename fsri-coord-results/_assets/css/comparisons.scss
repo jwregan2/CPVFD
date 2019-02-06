@@ -1,0 +1,237 @@
+
+.comparisons {
+  a {
+    @extend .-red-link;
+  }
+
+  img {
+    max-height: 25rem;
+  }
+
+  h2 {
+    margin-top: 4rem;
+  }
+
+  .right-hero, .left-hero {
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+  }
+
+
+  .comparison {
+    img {
+      box-shadow: 1px 1px 4px #ccc;
+    }
+
+    > div {
+      width: 100%;
+
+      @include media("<md") {
+        div {
+          margin-bottom: 3rem;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    .description {
+      font-style: italic;
+      margin-top: 1rem;
+    }
+
+    h3 {
+      margin-top: 6rem;
+
+      @include media("<sm") {
+        margin-top: 3rem;
+      }
+
+      &:first-child {
+        margin-top: 3rem;
+      }
+    }
+
+    .vs {
+      padding: 5rem 0;
+      position: relative;
+
+      @include media("<sm") {
+        padding: 2rem 0;
+      }
+
+      span {
+        background-color: #F2F2F2;
+        height: 5px;
+        position: absolute;
+        width: 100%;
+      }
+      > div {
+        background-color: #F2F2F2;
+        border-radius: 4rem;
+        color: #b10820;
+        font-size: 200%;
+        font-style: italic;
+        font-weight: 700;
+        height: 70px;
+        line-height: 67px;
+        position: relative;
+        text-align: center;
+        width: 70px;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .hero {
+    @extend .-full-width;
+    background-color: black;
+    height: 420px;
+    overflow: hidden;
+    position: relative;
+
+    .vs {
+      background-color: white;
+      border-radius: 50%;
+      color: #b10820;
+      font-size: 3rem;
+      font-style: italic;
+      font-weight: 700;
+      height: 110px;
+      left: 50%;
+      line-height: 107px;
+      margin-left: -38px;
+      margin-top: -40px;
+      position: absolute;
+      text-align:center;
+      top: 46%;
+      width: 110px;
+    }
+
+    .shim {
+      background-color: white;
+      height: 550px;
+      position: absolute;
+      transform-origin: center;
+      transform: translateX(50vw) translateY(-62px) rotate(35deg);
+      -ms-transform: translateX(50vw) translateY(-62px) rotate(35deg);
+      -webkit-transform: translateX(50vw) translateY(-62px) rotate(35deg);
+      width: 20px;
+      top: 0;
+    }
+
+    .text {
+      padding: 6rem 0 0 7%;
+      width: 35%;
+      position: absolute;
+      top: 0;
+
+      .series {
+        color: $red;
+        font-style: italic;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        color: white;
+        font-size: 2.2rem;
+        line-height: 2.75rem;
+        margin-top: 1rem;
+        text-transform: none;
+        &:after {
+          bottom: -0.7em;
+        }
+      }
+    }
+    @include media("<md") {
+      .vs, .shim {
+        display: none;
+      }
+      .text {
+        padding: 5.5rem 2rem;
+        width: 100%;
+      }
+    }
+  }
+
+  .jump {
+    background-color: #F2F2F2;
+    min-height: 4rem;
+    margin: 6rem 0 4rem 0;
+    padding-left: 2rem;
+
+    a {
+      font-weight: 600;
+      margin-left: 4rem;
+      line-height: 1.4rem;
+
+      @include media("<md") {
+        margin-left: 2rem;
+      }
+    }
+
+
+    @include media("<sm") {
+      margin: 4rem 0 1rem 0;
+
+      a {
+        margin: .5rem 0;
+      }
+    }
+  }
+
+  .backtotop {
+    @include default-transition;
+    background: $red;
+    border-radius: 4rem;
+    bottom: -20px;
+    color: white;
+    font-size: 200%;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0;
+    position: fixed;
+    right: 1.25rem;
+    text-align: center;
+    text-align: center;
+    transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    width: 3.5rem;
+
+    > span {
+      position: relative;
+      top: 3px;
+    }
+
+    &.active {
+      bottom: 80px;
+      opacity: 1;
+    }
+
+    &:hover {
+			bottom: 90px;
+			box-shadow: -6px 0px 6px 0px rgba(0, 0, 0, 0.26);
+      background: darken($red, 2%);
+      cursor: pointer;
+    }
+  }
+
+  .more-comparisons {
+    margin: 4rem 0;
+
+    @include media("<sm") {
+      margin-top: 0;
+    }
+
+    a {
+      margin-bottom: 1rem;
+    }
+  }
+}

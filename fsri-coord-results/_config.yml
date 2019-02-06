@@ -1,0 +1,130 @@
+title: Coordinated Attack
+description: > # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+
+
+
+baseurl: "" # the subpath of your site, e.g. /blog
+url: ""
+permalink: /posts/:categories/:slug.html
+
+google_analytics_id: UA-96263405-1
+
+default_keywords: firefighter,safety,research,ventilation,pressure,fire,ignition
+
+disqus_username: ulfsri-test
+
+links:
+  home: "/"
+  private: "/private/index.html"
+  privacy: "/privacy-policy.html"
+  terms: "/terms-of-use.html"
+
+collections:
+  experiments:
+    output: true
+    permalink: /:collection/:path/
+  experiments_data:
+    output: true
+    permalink: /:collection/:path/
+
+breadcrumbs:
+  root:
+    hide: false  # show breadcrumbs on root/home page
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: base
+  -
+    scope:
+      type: "pages"
+    values:
+      permalink: /:path/:basename:output_ext
+  -
+    scope:
+      path: "kitchen"
+    values:
+      group: kitchen
+      breadcrumbs: true
+  -
+    scope:
+      path: "bedroom"
+    values:
+      group: bedroom
+      breadcrumbs: true
+
+social:
+  facebook:
+    title: facebook
+    url: https://www.facebook.com/ULfirefightersafety
+  twitter:
+    title: twitter
+    url: https://twitter.com/UL_FSRI
+    share_text: Check it out!
+  youtube:
+    title: youtube
+    url: https://www.youtube.com/user/ULfirefightersafety
+  vimeo:
+    title: vimeo
+    url: https://vimeo.com/ulfsri
+  instagram:
+    title: instagram
+    url: https://www.instagram.com/ulfsri/
+
+assets:
+  assets:
+    - images/*.png
+    - images/*.jpg
+    - images/*.gif
+    - videos/*.mp4
+    - fonts/*.svg
+    - css/*.csv
+    - js/*.svg
+    - fonts/*.eot
+    - fonts/*.ttf
+    - fonts/*.otf
+    - fonts/*.svg
+    - fonts/*.woff
+    - docs/*.pdf
+    - partials/*.html
+
+  sources:
+    - _assets/videos
+    - _assets/docs
+    - _assets/partials
+
+  features:
+    automatic_img_size: false
+
+
+# Build settings
+markdown: kramdown
+layout: base.html
+gems:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-assets
+  - uglifier
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - app
+  - README.md
+  - Dockerfile
+  - deploy.sh
+  - bower.json
+  - _assets/js/lib
+  - to_migrate
+  - buildspec.yml
+
+mini_magick:
+  thumbnail:
+    source: _assets/images
+    destination: assets/thumbnails
+    resize: "600x600>"
+    quality: "85"

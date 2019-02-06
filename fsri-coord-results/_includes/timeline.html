@@ -1,0 +1,24 @@
+{% if page.timeline %}
+
+<h2>Event Timeline</h2>
+<div class="timeline">
+    {% for i in page.timeline %}
+    <div class="row" layout="row">
+        <div layout="column" layout-align="center center">{{ i.time }}</div>
+        <div layout="column" layout-align="center center">
+            <div class="line" flex></div>
+            <div class="icon {{ i.icon }}">
+                {% if i.icon == "circle" %}
+                <div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="line" flex></div>
+        </div>
+
+        <div layout="column" layout-align="center start">{{ i.name }}</div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endif %}

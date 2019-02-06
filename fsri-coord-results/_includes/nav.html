@@ -1,0 +1,55 @@
+<div id="top" class="navbar {% if page.breadcrumbs %}navbar-block{% endif %}" layout="row" layout-align="space-between center">
+    <div class="logo">
+        <a href="/">
+            <div class="img">
+                {% img logo.png %}
+            </div>
+            <div class="text">
+                UL Firefighter Safety <br/>Research Institute
+            </div>
+        </a>
+    </div>
+
+    <div class="links" hide show-gt-md>
+        <a class="link {% if page.active == 'home' %}active{% endif %}" href="{{ site.baseurl }}{% link index.html %}">
+            Project Home
+        </a>
+        <a class="link {% if page.active == 'grant' %}active{% endif %}" href="{{ site.baseurl }}{% link overview.md %}">
+            Grant Overview
+        </a>
+        <a class="link logout-link" href="#">
+            Logout
+        </a>
+    </div>
+
+    <div hide-gt-md>
+        <div layout="row" layout-align="end center">
+            <!-- Hamburger -->
+            <div class="burger" id="nav-toggle" layout="column" layout-align="center center">
+                <div class="background"></div>
+                <div class="lines">
+                    <div class="top"></div>
+                    <div class="middle"></div>
+                    <div class="bottom"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hamburger Menu Items -->
+        <div class="burger-links" id="nav-overlay" layout="column" layout-align="center center">
+            <nav>
+                <ul>
+                    <li><a class="link {% if page.active == 'home' %}active{% endif %}" href="{{ site.baseurl }}{% link index.html %}">
+                        Project Home
+                    </a></li>
+                    <li><a class="link {% if page.active == 'grant' %}active{% endif %}" href="{{ site.baseurl }}{% link overview.md %}">
+                        Grant Overview
+                    </a></li>
+                    <li><a class="link logout-link" href="#">
+                        Logout
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

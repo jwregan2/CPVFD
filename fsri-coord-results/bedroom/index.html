@@ -1,0 +1,78 @@
+---
+layout: experiment_group
+title: Bedroom Experiments
+hero_image: home/bedroom.jpg
+custom_js:
+  - 'experiment-filtering.js'
+hero_excerpt: To study the impact of fireground coordination on second floor bedroom fires in single family homes, structures were acquired through partnerships with local fire departments. Experiments studied both interior and exterior attack combined with different ventilation types (horizontal, vertical, and positive pressure). The structures were instrumented to quantify the hazard to potential vicitms and firefighters.
+experiments:
+  -
+    number: 2
+    structure: 2401 Wapakoneta Ave, Sidney, OH
+    attack_method: Interior
+    ventilation: Hydraulic
+  -
+    number: 4
+    structure: 2401 Wapakoneta Ave, Sidney, OH
+    attack_method: Interior
+    ventilation: Serious (all second story windows)
+  -
+    number: 5
+    structure: 2401 Wapakoneta Ave, Sidney, OH
+    attack_method: Interior
+    ventilation: PPV
+  -
+    number: 7
+    structure: 201 Water St, Sidney, OH
+    attack_method: Interior
+    ventilation: Vertical Over Fire
+  -
+    number: 8
+    structure: 201 Water St, Sidney, OH
+    attack_method: Interior
+    ventilation: Vertical Remote From Fire
+  -
+    number: 10
+    structure: 230 N Walnut St, Sidney, OH
+    attack_method: Transitional
+    ventilation: None
+  -
+    number: 11
+    structure: 230 N Walnut St, Sidney, OH
+    attack_method: Transitional
+    ventilation: PPV
+  -
+    number: 12
+    structure: 230 N Walnut St, Sidney, OH
+    attack_method: Transitional
+    ventilation: Serious (all second story windows)
+---
+
+<ul class="experiment-list" layout="column" layout-align="start start">
+    <li layout="row" layout-align="start center">
+        <div>Experiment</div>
+        <div>Structure</div>
+        <div>Attack Method</div>
+        <div flex="100">Ventilation</div>
+        <div></div>
+    </li>
+    {% for i in page.experiments %}
+    <li layout="row" layout-align="start stretch" data-fire-location="{{ i.fire_location | downcase | replace: ' ','-' | replace: '&', '' | replace: ',', ''}}" data-ventilation="{{ i.ventilation | downcase | replace: ' ','-' | replace: '+', '' | replace: ',', '' }}">
+        <div layout="row" layout-align="center center">
+            <div>{{ i.number }}</div>
+        </div>
+        <div layout="row" layout-align="start center">
+            <div>{{ i.structure }}</div>
+        </div>
+        <div layout="row" layout-align="start center">
+            <div>{{ i.attack_method }}</div>
+        </div>
+        <div layout="row" layout-align="start center">
+            <div>{{ i.ventilation }}</div>
+        </div>
+        <div layout="row" layout-align="end center">
+            <a href="{{ site.baseurl }}/bedroom/experiment-{{ i.number }}/index.html">View Experiment</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,49 @@
+---
+layout: experiment_group
+title: Kitchen Experiments
+hero_image: home/kitchen.jpg
+custom_js:
+  - 'experiment-filtering.js'
+hero_excerpt: To study the impact of fire ground coordination on kitchen fires in single family homes, structures were acquired through partnerships with local fire departments. Experiments studied both interior and exterior attack combined with different ventilation types (horizontal and positive pressure). The structures were instrumented to quantify the hazard to potential vicitms and firefighters.
+experiments:
+  -
+    number: 17
+    structure: 230 N Walnut Ave, Sidney, OH
+    attack_method: Interior
+    ventilation: Horizontal with PPV
+  -
+    number: 19
+    structure: 732 Broadway Ave, Sidney, OH
+    attack_method: Transition
+    ventilation: Serious (all windows)
+
+---
+
+<ul class="experiment-list" layout="column" layout-align="start start">
+    <li layout="row" layout-align="start center">
+        <div>Experiment</div>
+        <div>Structure</div>
+        <div>Attack Method</div>
+        <div flex="100">Ventilation</div>
+        <div></div>
+    </li>
+    {% for i in page.experiments %}
+    <li layout="row" layout-align="start stretch" data-fire-location="{{ i.fire_location | downcase | replace: ' ','-' | replace: '&', '' | replace: ',', ''}}" data-ventilation="{{ i.ventilation | downcase | replace: ' ','-' | replace: '+', '' | replace: ',', '' }}">
+        <div layout="row" layout-align="center center">
+            <div>{{ i.number }}</div>
+        </div>
+        <div layout="row" layout-align="start center">
+            <div>{{ i.structure }}</div>
+        </div>
+        <div layout="row" layout-align="start center">
+            <div>{{ i.attack_method }}</div>
+        </div>
+        <div layout="row" layout-align="start center" flex="100">
+            <div>{{ i.ventilation }}</div>
+        </div>
+        <div layout="row" layout-align="end center">
+            <a href="{{ site.baseurl }}/kitchen/experiment-{{ i.number }}/index.html">View Experiment</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
