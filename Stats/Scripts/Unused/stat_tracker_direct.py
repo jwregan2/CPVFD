@@ -11,9 +11,10 @@ import sqlite3
 import pandas as pd
 
 
-
+import geopy
+from geopy.geocoders import Nominatim
 import pyodbc
-# import pandas_access as mdb
+import pandas_access as mdb
 import os as os
 import numpy as np 
 from pylab import * 
@@ -44,12 +45,12 @@ else:
 	past_mo = int(current_mo - 1)
 	year = (date[-4:])
   
-conn = pyodbc.connect('Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ={C:/CPVFD_IRS/2013_IRS.accdb};')
+conn = pyodbc.connect('Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:/Users/39912/Documents/GitHub/CPFD/CPVFD/Stats/2013_IRS.accdb;')
 cur = conn.cursor()
-print('Stats')
-fire_responses = pd.read_sql_query("select * from  {Responses Fire};", conn)
-ambo_responses = pd.read_sql_query("select * from  {Responses Ambo};", conn)
-member_names = pd.read_sql_query("select * from  {CPVFD members};", conn)
+
+fire_responses = pd.read_sql_query("select * from  Responses_Fire;", conn)
+ambo_responses = pd.read_sql_query("select * from  Responses_Ambo;", conn)
+member_names = pd.read_sql_query("select * from  CPVFD_members;", conn)
 member_names = member_names.set_index('ID')
 output_location='../Monthly_Stats/'
 
@@ -71,7 +72,6 @@ stats_array['FIRST NAME']= member_names['FirstName']
 
 units_ls = ['Unit 1','Unit 2','Unit 3','Unit 4','Unit 5']
 seats_ls = [' Dr ID',' Off ID',' FF1 ID',' FF2 ID',' FF3 ID',' FF4 ID',' FF5 ID',' FF6 ID',' FF7 ID']
-print('Building')
 #Loop through fire dataframe and assign stats to each person on a call
 for i in fire_responses.index.values:
 	df_month = str(fire_responses['Date'][i]).split('-')[1]
@@ -203,3 +203,52 @@ print(stats_array)
 if not os.path.exists(output_location):
 	os.makedirs(output_location)
 stats_array.to_csv(output_location+str(past_mo)+'_'+str(year)+'.csv')
+
+# j=0
+# k=0
+# for i in df['Location']:	
+# 	try:
+# 		geolocator = Nominatim(user_agent="specify_your_app_name_here")
+# 		location = geolocator.geocode(i+" Prince George's County MD")
+# 		j=j+1
+
+# 		# print(location.address)
+
+# 		# print((location.latitude, location.longitude))
+
+# 		# print(location.raw)
+# 	except:
+# 		# print(i)
+# 		k=k+1		
+# 		continue
+# 	print(j/(j+k))
+# print(j/(j+k))
+
+
+
+
+
+
+
+
+
+# fig, ax = plt.subplots(figsize=(10,20))
+
+# m = Basemap(resolution='c', # c, l, i, h, f or None
+#             projection='merc',
+#             lat_0=54.5, lon_0=-4.36,
+#             llcrnrlon=-6., llcrnrlat= 49.5, urcrnrlon=2., urcrnrlat=55.2)
+
+
+
+# m.drawmapboundary(fill_color='#46bcec')
+# m.fillcontinents(color='#f2f2f2',lake_color='#46bcec')
+# m.drawcoastlines()
+# geolocator = Nominatim(user_agent="specify_your_app_name_here")
+# location = geolocator.geocode("8115 Baltimore Av Prince George's County MD")
+# plt.show()
+# print(location.address)
+
+# print((location.latitude, location.longitude))
+
+# print(location.raw)

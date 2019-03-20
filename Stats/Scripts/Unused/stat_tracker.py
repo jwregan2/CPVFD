@@ -1,21 +1,7 @@
-# Experiment Plotter IFSI Training Fires
-#!/usr/bin/env python
- 
-# from mpl_toolkits.basemap import Basemap
-# from matplotlib.patches import Polygon
-# from matplotlib.collections import PatchCollection
-# from matplotlib.colors import Normalize
-import matplotlib.pyplot as plt
-import matplotlib.cm
-import sqlite3
-import pandas as pd
-
-
-
-import pyodbc
-# import pandas_access as mdb
+import pandas as pd 
 import os as os
 import numpy as np 
+import matplotlib.pyplot as plt
 from pylab import * 
 import datetime
 import shutil
@@ -29,10 +15,10 @@ import time
 manual_dates = True
 if manual_dates ==True:
 	#Enter Year in XXXX Format
-	year=2018
+	year=2016
 
 	#Enter Month in XX 
-	past_mo=8
+	past_mo=7
 
 	# Period_St=''
 	# Period_End=''
@@ -43,15 +29,25 @@ else:
 	current_mo = int(date[:2])
 	past_mo = int(current_mo - 1)
 	year = (date[-4:])
-  
-conn = pyodbc.connect('Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ={C:/CPVFD_IRS/2013_IRS.accdb};')
-cur = conn.cursor()
-print('Stats')
-fire_responses = pd.read_sql_query("select * from  {Responses Fire};", conn)
-ambo_responses = pd.read_sql_query("select * from  {Responses Ambo};", conn)
-member_names = pd.read_sql_query("select * from  {CPVFD members};", conn)
-member_names = member_names.set_index('ID')
+
+number_mo_ls = [1,2,3,4,5,6,7,8,9,10,11,12]
+fire_mo_ls = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+fire_mo_s = pd.Series(fire_mo_ls,index=number_mo_ls)
+fire_mo = fire_mo_s[past_mo]
+fire_yr = str(year)[-2:]
+
+##DATA LOCATIONS##
+
 output_location='../Monthly_Stats/'
+
+member_names=pd.read_csv('../csv_files/CPVFD_Members.csv')
+member_names=member_names.set_index('ID')
+
+fire_responses=pd.read_csv('../csv_files/Responses_Fire.csv')
+
+
+ambo_responses=pd.read_csv('../csv_files/Responses_Ambo.csv')
+##ASSEMBLE STAT ARRAY##
 
 ## BUILD DATAFRAME THAT HAS COLUMNS FOR EACH STAT CATEGORY AND HAS ROWS FOR EACH MEMBER IN MEMBER NAMES
 column_headers=['ID', 'LAST NAME', 'FIRST NAME', 'TKD', 'TKO', 'TKB', 'END', 'ENO', 'ENB', 'FMD', 'FMO', 'FMB', 'HMD', 'HMO', 'CTD', 'CTO', 'CTB', 'AMD', 'AMO', 'AMB', 'PAD', 'PAO', 'PAB', 'STAT', 'CFO','MON', 'YR', 'M RANK', 'Y RANK']
@@ -71,15 +67,12 @@ stats_array['FIRST NAME']= member_names['FirstName']
 
 units_ls = ['Unit 1','Unit 2','Unit 3','Unit 4','Unit 5']
 seats_ls = [' Dr ID',' Off ID',' FF1 ID',' FF2 ID',' FF3 ID',' FF4 ID',' FF5 ID',' FF6 ID',' FF7 ID']
-print('Building')
 #Loop through fire dataframe and assign stats to each person on a call
 for i in fire_responses.index.values:
-	df_month = str(fire_responses['Date'][i]).split('-')[1]
-	df_year = str(fire_responses['Date'][i]).split('-')[0]
+	df_month = fire_responses['Date'][i].split('-')[-2]
+	df_year = fire_responses['Date'][i].split('-')[-1]
 
-
-	if str(df_year) == str(year):
-		print(df_month,past_mo)
+	if str(df_year) == str(fire_yr):
 		for unit in units_ls:
 			for seat in seats_ls:
 				if pd.isnull(fire_responses[unit+seat][i]):
@@ -88,7 +81,7 @@ for i in fire_responses.index.values:
 				if member not in stats_array.index.values:
 					continue
 				stats_array.loc[(member),'YR'] = int(stats_array.loc[(member),'YR'] +1)
-		if int(df_month) == int(past_mo):
+		if str(df_month) == str(fire_mo):
 			for unit in units_ls:
 				for seat in seats_ls:
 					if pd.isnull(fire_responses[unit+seat][i]):
@@ -158,14 +151,13 @@ for i in fire_responses.index.values:
 						elif 'Off' in unit+seat:
 							stats_array.loc[member,'STAT'] = int(stats_array.loc[member,'STAT'] +1)
 						else:
-							stats_array.loc[member,'STAT'] = int(stats_array.loc[member,'STAT'] +1)			
-
+							stats_array.loc[member,'STAT'] = int(stats_array.loc[member,'STAT'] +1)						
 ambo_ls =['Unit 1 Dr ID','Unit 1 Off ID','Unit 1 FF1 ID','Unit 1 FF2 ID']
 for i in ambo_responses.index.values:
 	if pd.isnull(ambo_responses['Date'][i]):
 		continue
-	df_month = str(ambo_responses['Date'][i]).split('-')[1]
-	df_year = str(ambo_responses['Date'][i]).split('-')[0]
+	df_month = str(ambo_responses['Date'][i]).split('/')[0]
+	df_year = ambo_responses['Date'][i].split('/')[-1]
 	if str(df_year) == str(year):
 		for seat in ambo_ls:
 			if pd.isnull(ambo_responses[seat][i]):
@@ -174,7 +166,7 @@ for i in ambo_responses.index.values:
 			if member not in stats_array.index.values:
 				continue
 			stats_array.loc[(member),'YR'] = stats_array.loc[(member),'YR'] +1
-		if int(df_month) == int(past_mo):
+		if str(df_month) == str(past_mo):
 			for seat in ambo_ls:
 				if pd.isnull(ambo_responses[seat][i]):
 					continue
@@ -202,4 +194,5 @@ stats_array['Y RANK'] = stats_array['YR'].rank(ascending = False)
 print(stats_array)
 if not os.path.exists(output_location):
 	os.makedirs(output_location)
-stats_array.to_csv(output_location+str(past_mo)+'_'+str(year)+'.csv')
+stats_array.to_csv(output_location+str(fire_mo)+'_'+str(year)+'.csv')
+
